@@ -1,8 +1,8 @@
 package repos.model
 
 /**
- * Created by zhupei on 2019/1/12.
- * @author: zhupei
+ * Created by Univer Quie on 2019/1/12.
+ * @author: Univer Quie
  * @email: 397826579@qq.com
  * InvAgencyInfosModel
  */

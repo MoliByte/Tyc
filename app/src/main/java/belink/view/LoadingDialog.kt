@@ -1,9 +1,9 @@
 package belink.view;
 
 /**
- * Created by zhupei on 2019/1/10.
+ * Created by Univer Quie on 2019/1/10.
  *
- * @author: zhupei
+ * @author: Univer Quie
  * @email: 397826579@qq.com
  */
 import android.app.Dialog

@@ -8,8 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by zhupei on 2019/1/10.
- * @author: zhupei
+ * Created by Univer Quie on 2019/1/10.
+ * @author: Univer Quie
  * @email: 397826579@qq.com
  */
 enum class ApiErrorType(val code: Int, @param: StringRes private val messageId: Int) {

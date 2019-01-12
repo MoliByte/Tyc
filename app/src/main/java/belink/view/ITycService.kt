@@ -5,8 +5,8 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import repos.model.*
 
 /**
- * Created by zhupei on 2019/1/12.
- * @author: zhupei
+ * Created by Univer Quie on 2019/1/12.
+ * @author: Univer Quie
  * @email: 397826579@qq.com
  */
 interface ITycService {
