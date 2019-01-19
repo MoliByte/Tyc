@@ -18,7 +18,7 @@ data class SearchData (
     var modifiedQuery: String? = "",
     var companyTotalPage: String? = "",
     var humanCount: String? = "",
-    var companyList: List<CompanyList>? = null
+    var companyList: List<CompanyItem>? = null
 ){
     override fun toString(): String {
         return "SearchData(modifiedQuery=$modifiedQuery, companyTotalPage=$companyTotalPage, humanCount=$humanCount, companyList=$companyList)"
@@ -26,7 +26,7 @@ data class SearchData (
 
 }
 
-class CompanyList {
+class CompanyItem {
     var id: String? = ""
     var name: String? = ""
     var type: String? = ""

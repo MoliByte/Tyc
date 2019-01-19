@@ -10,6 +10,7 @@ import repos.model.*
  * @email: 397826579@qq.com
  */
 interface ITycService {
+
     /**
      * 登录
      */

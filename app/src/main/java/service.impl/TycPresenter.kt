@@ -13,6 +13,9 @@ import repos.model.*
  */
 object TycPresenter : AbsTycPresenter() {
 
+    init {
+
+    }
 
     /**
      * 登录
