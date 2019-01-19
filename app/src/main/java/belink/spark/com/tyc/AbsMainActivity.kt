@@ -1,49 +1,86 @@
 package belink.spark.com.tyc
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
+import android.widget.ImageView
 import android.widget.SearchView
-import belink.view.AbsView
+import android.widget.TextView
+import belink.adapter.HotSearchAdapter
 import belink.view.BaseActivity
 import belink.view.recyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
-import org.jetbrains.anko.matchParent
-import org.jetbrains.anko.searchView
-import org.jetbrains.anko.verticalLayout
-import repos.model.CompanyItem
-import repos.model.SearchJsonModel
-import service.impl.TycPresenter
+import org.jetbrains.anko.*
+import repos.model.HotResult
+
 
 /**
  * Created by Univer Quie on 2019/1/12.
  * @author: Univer Quie
  * @email: 397826579@qq.com
+
+TycPresenter.authLogin(this, bodyBuilder, loginCallBack)
+TycPresenter.search_sNorV3(this, "平安科技有限公司", searchCallBack)
+TycPresenter.tCommonBaseInfoV5(this, "199557844", baseInfoCallBack)
+TycPresenter.hotSearchWxHotWord(this, hotSearchCallBack)
+ *
  */
 abstract class AbsMainActivit : BaseActivity(), SearchView.OnQueryTextListener {
-
-    lateinit var companyAdapter: CompanyAdapter
+    lateinit var hotSearchAdapter: HotSearchAdapter
     lateinit var searchView: SearchView
 
     override fun initView() {
         verticalLayout {
-            searchView = searchView()
-            searchView.setIconifiedByDefault(false)
-            searchView.isSubmitButtonEnabled = true
-            searchView.queryHint = "查公司"
-            searchView.setOnQueryTextListener(this@AbsMainActivit)
+            relativeLayout {
+                backgroundResource = R.mipmap.head_bg
+                searchView = searchView().lparams {
+                    width = matchParent
+                    height = dip(60)
+                    alignParentBottom()
+                }
+
+                val imgId = searchView.context.resources.getIdentifier("android:id/search_mag_icon", null, null)
+                val searchButton = searchView.findViewById(imgId) as ImageView
+                searchButton.setImageResource(R.mipmap.search_icon)
+
+                val txtId = searchView.context.resources.getIdentifier("android:id/search_src_text", null, null)
+                val textView = searchView.findViewById(txtId) as TextView
+                textView.setHintTextColor(context.resources.getColor(R.color.search_hint_color))
+                textView.setTextColor(Color.WHITE)//字体颜色
+                textView.textSize = 16f//字体、提示字体大小
+                textView.hint = context.getString(R.string.search_hint)
+
+                searchView.isIconified = false
+                searchView.setIconifiedByDefault(false);
+//                searchView.onActionViewExpanded();
+                searchView.isSubmitButtonEnabled = false
+                searchView.setOnQueryTextListener(this@AbsMainActivit)
+
+                //中间图片
+                imageView {
+                    backgroundResource = R.mipmap.cc_txt
+                    scaleType = ImageView.ScaleType.FIT_XY
+                }.lparams {
+                    width = wrapContent
+                    height = wrapContent
+                    centerInParent()
+                }
+
+            }.lparams(width = matchParent) {
+                height = dip(200)
+            }// 头部相对布局
+
             recyclerView {
                 layoutManager = LinearLayoutManager(this@AbsMainActivit)
-                companyAdapter = CompanyAdapter()
-                adapter = companyAdapter
+                hotSearchAdapter = HotSearchAdapter()
+                adapter = hotSearchAdapter
 
-                companyAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+                hotSearchAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
                     var item: Any? = adapter.getItem(position)
-                    if (item is CompanyItem) {
-                        var bundle: Bundle = Bundle()
+                    if (item is HotResult) {
+                        var bundle = Bundle()
 
-                        bundle.putString("companyId", item.id)
+                        bundle.putString("companyId", item.cid)
                         goActivity(this@AbsMainActivit, CompanyDetailsActivity::class.java, bundle)
                     }
 
@@ -54,19 +91,14 @@ abstract class AbsMainActivit : BaseActivity(), SearchView.OnQueryTextListener {
                 height = matchParent
             }
 
-
+            initData()
         }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-
-        TycPresenter.search_sNorV3(this, query, object : AbsView<SearchJsonModel>() {
-            override fun success(data: SearchJsonModel) {
-                val baseInfoModel: SearchJsonModel? = data
-                Log.e(TAG, baseInfoModel?.state)
-                companyAdapter.setNewData(baseInfoModel?.data?.companyList)
-            }
-        })
+        var bundle = Bundle()
+        bundle.putString("query", query)
+        goActivity(this@AbsMainActivit, CompanySearchResultActivity::class.java, bundle)
         return false
     }
 
@@ -75,12 +107,4 @@ abstract class AbsMainActivit : BaseActivity(), SearchView.OnQueryTextListener {
     }
 
 
-    class CompanyAdapter : BaseQuickAdapter<CompanyItem, BaseViewHolder>(R.layout.item_company) {
-
-        override fun convert(helper: BaseViewHolder, item: CompanyItem) {
-            helper.setText(R.id.tv_name, item.name)
-        }
-
-
-    }
 }

@@ -34,11 +34,11 @@ data class Fromnode(
 )
 
 data class HotHuman(
-        var resultList: List<Result> = listOf()
+        var resultList: List<HotResult> = listOf()
 )
 
-data class Result(
-        var cid: Long = 0,
+data class HotResult(
+        var cid: String? = "",
         var code: String = "",
         var companyNum: Int = 0,
         var headUrl: String = "",
