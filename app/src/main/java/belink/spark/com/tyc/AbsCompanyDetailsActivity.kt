@@ -21,8 +21,6 @@ abstract class AbsCompanyDetailsActivity : BaseActivity() {
                 text = textView()
             }
         }
-
-        initData()
     }
 
 }

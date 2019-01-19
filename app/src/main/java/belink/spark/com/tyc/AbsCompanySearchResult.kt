@@ -74,7 +74,6 @@ abstract class AbsCompanySearchResult : BaseActivity() {
                 height = matchParent
             }
 
-            initData()
         }
     }
 

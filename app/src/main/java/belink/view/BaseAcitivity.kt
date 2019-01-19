@@ -29,6 +29,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
 //        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.onCreate(savedInstanceState)
         initView()
+        initData()
     }
 
 

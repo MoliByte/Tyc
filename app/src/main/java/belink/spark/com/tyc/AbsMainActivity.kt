@@ -90,8 +90,6 @@ abstract class AbsMainActivit : BaseActivity(), SearchView.OnQueryTextListener {
             }.lparams(width = matchParent) {
                 height = matchParent
             }
-
-            initData()
         }
     }
 
