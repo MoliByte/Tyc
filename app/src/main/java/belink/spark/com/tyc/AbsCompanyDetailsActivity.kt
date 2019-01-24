@@ -2,7 +2,7 @@ package belink.spark.com.tyc
 
 import android.widget.ScrollView
 import android.widget.TextView
-import belink.view.BaseActivity
+import belink.view.AbsAnkoAcitivity
 import org.jetbrains.anko.scrollView
 import org.jetbrains.anko.textView
 import org.jetbrains.anko.verticalLayout
@@ -12,7 +12,7 @@ import org.jetbrains.anko.verticalLayout
  * @author: Univer Quie
  * @email: 397826579@qq.com
  */
-abstract class AbsCompanyDetailsActivity : BaseActivity() {
+abstract class AbsCompanyDetailsActivity : AbsAnkoAcitivity() {
     lateinit var scrollView: ScrollView
     lateinit var text: TextView
     override fun initView() {

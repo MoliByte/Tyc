@@ -13,6 +13,7 @@ class CompanySearchResultActivity : AbsCompanySearchResult() {
     override fun initData() {
         val query = intent.getStringExtra("query")
         Log.e(TAG, "query = " + query)
+        searchView.setQuery(query,false)
         TycPresenter.search_sNorV3(this, query, object : AbsView<SearchJsonModel>() {
             override fun success(data: SearchJsonModel) {
                 val baseInfoModel: SearchJsonModel? = data
@@ -20,7 +21,5 @@ class CompanySearchResultActivity : AbsCompanySearchResult() {
                 companyAdapter.setNewData(baseInfoModel?.data?.companyList)
             }
         })
-
-
     }
 }

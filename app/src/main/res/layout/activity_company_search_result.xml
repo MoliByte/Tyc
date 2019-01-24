@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--公司搜索结果页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:fitsSystemWindows="false"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/edit_search"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/search_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:contentDescription="back"
+            android:paddingStart="5dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/icon_white_back"/>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:background="@drawable/search_shape"
+            android:queryHint="@string/search_hint"/>
+    </RelativeLayout>
+
+    <include layout="@layout/include_recycleview_no_behavior"/>
+
+</LinearLayout>

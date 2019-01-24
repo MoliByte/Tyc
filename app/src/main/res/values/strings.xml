@@ -5,5 +5,9 @@
     <string name="timeout">请求超时</string>
     <string name="unexpected_error">未知错误</string>
     <string name="network_wrong">网络有问题</string>
-    <string name="search_hint">查公司</string>
+    <string name="search_hint">查公司、查老板、查关系</string>
+    <string name="header_float_behavior">belink.behavior.HeaderFloatBehavior</string>
+    <string name="header_scrolling_behavior">belink.behavior.HeaderScrollingBehavior</string>
+
+
 </resources>
