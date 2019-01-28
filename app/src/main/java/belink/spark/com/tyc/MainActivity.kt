@@ -12,7 +12,7 @@ class MainActivity : AbsMainActivit() {
             override fun success(data: HomePageHotWordModel) {
                 val baseInfoModel: HomePageHotWordModel? = data
                 Log.e(TAG, baseInfoModel?.state)
-                hotSearchAdapter.setNewData(baseInfoModel?.data?.hotHuman?.resultList)
+                hotSearchAdapter?.setNewData(baseInfoModel?.data?.hotHuman?.resultList)
             }
         })
     }

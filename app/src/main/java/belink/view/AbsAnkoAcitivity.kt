@@ -1,6 +1,9 @@
 package belink.view
 
 import android.os.Bundle
+import android.widget.ImageView
+import belink.spark.com.tyc.R
+import org.jetbrains.anko.*
 
 /**
  * Created by Univer Quie on 2019/1/10.
@@ -21,8 +24,25 @@ abstract class AbsAnkoAcitivity : BaseActivity() {
     }
 
 
+    fun initVerticalView() {
+        verticalLayout {
+            //header
+            relativeLayout {
+                backgroundResource = R.color.title_bg
+                imageView {
+                    imageResource = R.mipmap.icon_white_back
+                    scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    adjustViewBounds = true
+                    setOnClickListener { finish() }
+                }.lparams(wrapContent, toolbarHeight) {
+                    centerVertically()
+                    alignParentStart()
+                }
+            }.lparams(matchParent, toolbarHeight)
 
 
+        }
+    }
 
 
 }

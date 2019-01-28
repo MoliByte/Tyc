@@ -8,7 +8,9 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import belink.spark.com.tyc.R
+import belink.spark.tyc.App
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import org.jetbrains.anko.dip
 
 /**
  * Created by Univer Quie on 2019/1/10.
@@ -17,6 +19,9 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
  */
 abstract class BaseActivity : RxAppCompatActivity() {
     val TAG: String? = javaClass.simpleName
+    var viewHolder: ViewHolderBuilder? = null
+
+    val toolbarHeight:Int = App.instance.dip(60)
 
     /**
      * 初始化视图
@@ -44,9 +49,9 @@ abstract class BaseActivity : RxAppCompatActivity() {
         startActivity(intent)
     }
 
-    fun initSeachView(searchView: SearchView) {
+    fun initSeachView(searchView: SearchView?) {
         //搜索icon
-        val searchIconId = searchView.context.resources.getIdentifier("android:id/search_mag_icon", null, null)
+        val searchIconId = searchView?.context!!.resources.getIdentifier("android:id/search_mag_icon", null, null)
         val searchButton = searchView.findViewById(searchIconId) as ImageView
         searchButton.setImageResource(R.mipmap.search_icon)
 
