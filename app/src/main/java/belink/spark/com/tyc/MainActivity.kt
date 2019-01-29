@@ -1,8 +1,8 @@
 package belink.spark.com.tyc
 
-import android.util.Log
 import belink.view.AbsView
 import repos.model.HomePageHotWordModel
+import repos.model.HotSearchModel
 import service.impl.TycPresenter
 
 class MainActivity : AbsMainActivit() {
@@ -11,8 +11,14 @@ class MainActivity : AbsMainActivit() {
         TycPresenter.searchHomePageHotWord(this, object : AbsView<HomePageHotWordModel>() {
             override fun success(data: HomePageHotWordModel) {
                 val baseInfoModel: HomePageHotWordModel? = data
-                Log.e(TAG, baseInfoModel?.state)
                 hotSearchAdapter?.setNewData(baseInfoModel?.data?.hotHuman?.resultList)
+            }
+        })
+
+        TycPresenter.hotSearchWxHotWord(this, object : AbsView<HotSearchModel>() {
+            override fun success(data: HotSearchModel) {
+                val baseInfoModel: HotSearchModel? = data
+                wxHotSearchAdapter?.setNewData(baseInfoModel?.data)
             }
         })
     }

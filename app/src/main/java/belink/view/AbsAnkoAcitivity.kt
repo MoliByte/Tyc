@@ -9,6 +9,7 @@ import org.jetbrains.anko.*
  * Created by Univer Quie on 2019/1/10.
  * @author: Univer Quie
  * @email: 397826579@qq.com
+ * Anko 布局父类
  */
 abstract class AbsAnkoAcitivity : BaseActivity() {
 

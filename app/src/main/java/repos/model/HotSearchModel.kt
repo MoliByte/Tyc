@@ -8,16 +8,16 @@ package repos.model
  * tyc 热搜
  */
 data class HotSearchModel(
-        var data: List<Data> = listOf()
+        var data: List<WxHotWordCompanyData> = listOf()
 ) : BaseInfoModel() {
     override fun toString(): String {
         return "HotSearchModel(data=$data)"
     }
 }
 
-data class Data(
+data class WxHotWordCompanyData(
         var alias: String = "",
-        var cid: Long = 0,
+        var cid: String = "",
         var companyName: String = "",
         var companyType: Int = 0,
         var legalPersonName: String = "",

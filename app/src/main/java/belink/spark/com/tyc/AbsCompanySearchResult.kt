@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.ImageView
 import android.widget.SearchView
-import belink.adapter.CompanyAdapter
 import belink.view.AbsView
 import belink.view.AbsXmlAcitivity
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -21,7 +20,6 @@ import service.impl.TycPresenter
  *
  */
 abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTextListener {
-    lateinit var companyAdapter: CompanyAdapter
     lateinit var searchView: SearchView
     lateinit var recyclerView: RecyclerView
 
@@ -39,9 +37,8 @@ abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTex
         }
         initSeachView(searchView)
         recyclerView = findViewById(R.id.recyclerView)
-        companyAdapter = CompanyAdapter()
         recyclerView.adapter = companyAdapter
-        companyAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        companyAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             var item: Any? = adapter.getItem(position)
             if (item is CompanyItem) {
                 var bundle = Bundle()
@@ -58,7 +55,7 @@ abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTex
             override fun success(data: SearchJsonModel) {
                 val baseInfoModel: SearchJsonModel? = data
                 Log.e(TAG, baseInfoModel?.state)
-                companyAdapter.setNewData(baseInfoModel?.data?.companyList)
+                companyAdapter?.setNewData(baseInfoModel?.data?.companyList)
             }
         })
         return false

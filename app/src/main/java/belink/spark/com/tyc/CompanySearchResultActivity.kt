@@ -18,7 +18,7 @@ class CompanySearchResultActivity : AbsCompanySearchResult() {
             override fun success(data: SearchJsonModel) {
                 val baseInfoModel: SearchJsonModel? = data
                 Log.e(TAG, baseInfoModel?.state)
-                companyAdapter.setNewData(baseInfoModel?.data?.companyList)
+                companyAdapter?.setNewData(baseInfoModel?.data?.companyList)
             }
         })
     }

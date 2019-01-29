@@ -7,10 +7,15 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import belink.adapter.AbsTycAdapter
 import belink.spark.com.tyc.R
 import belink.spark.tyc.App
+import com.chad.library.adapter.base.BaseViewHolder
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.jetbrains.anko.dip
+import repos.model.CompanyItem
+import repos.model.HotResult
+import repos.model.WxHotWordCompanyData
 
 /**
  * Created by Univer Quie on 2019/1/10.
@@ -21,7 +26,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     val TAG: String? = javaClass.simpleName
     var viewHolder: ViewHolderBuilder? = null
 
-    val toolbarHeight:Int = App.instance.dip(60)
+    val toolbarHeight: Int = App.instance.dip(60)
 
     /**
      * 初始化视图
@@ -49,6 +54,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
         startActivity(intent)
     }
 
+    // 初始化搜索样式
     fun initSeachView(searchView: SearchView?) {
         //搜索icon
         val searchIconId = searchView?.context!!.resources.getIdentifier("android:id/search_mag_icon", null, null)
@@ -84,5 +90,36 @@ abstract class BaseActivity : RxAppCompatActivity() {
         searchView.clearFocus()
     }
 
+// ================= begin all app adapters view handler =========================
+    /**
+     * 天眼查微信小程序热搜公司adapter
+     */
+    var wxHotSearchAdapter: AbsTycAdapter<WxHotWordCompanyData>? = object : AbsTycAdapter<WxHotWordCompanyData>(R.layout.item_hot_search_company) {
+        override fun initItemData(helper: BaseViewHolder, item: WxHotWordCompanyData) {
+            helper.setText(R.id.tv_name, item.companyName)
+        }
+    }
+
+    /**
+     * 天眼查热搜公司adapter
+     */
+    var hotSearchAdapter: AbsTycAdapter<HotResult>? = object : AbsTycAdapter<HotResult>(R.layout.item_hot_search_company) {
+        override fun initItemData(helper: BaseViewHolder, item: HotResult) {
+            helper.setText(R.id.tv_name, item.office[0].companyName)
+        }
+    }
+
+    /**
+     * 搜索公司名称返回的结果列表
+     */
+    var companyAdapter: AbsTycAdapter<CompanyItem>? = object : AbsTycAdapter<CompanyItem>(R.layout.item_company) {
+
+        override fun initItemData(helper: BaseViewHolder, item: CompanyItem) {
+            helper.setText(R.id.tv_name, item.name)
+        }
+    }
+
+
+// ================= end of all app adapters view handler =========================
 
 }

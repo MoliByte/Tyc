@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.SearchView
-import belink.adapter.CompanyAdapter
 import belink.view.AbsAnkoAcitivity
 import belink.view.AbsView
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -24,7 +23,6 @@ import service.impl.TycPresenter
  * @email: 397826579@qq.com
  */
 abstract class DemoAnkoInitView : AbsAnkoAcitivity() {
-    lateinit var companyAdapter: CompanyAdapter
     lateinit var searchView: SearchView
 
     override fun initView() {
@@ -45,7 +43,7 @@ abstract class DemoAnkoInitView : AbsAnkoAcitivity() {
                             override fun success(data: SearchJsonModel) {
                                 val baseInfoModel: SearchJsonModel? = data
                                 Log.e(TAG, baseInfoModel?.state)
-                                companyAdapter.setNewData(baseInfoModel?.data?.companyList)
+                                companyAdapter?.setNewData(baseInfoModel?.data?.companyList)
                             }
                         })
                         return false
@@ -60,10 +58,9 @@ abstract class DemoAnkoInitView : AbsAnkoAcitivity() {
 
             recyclerView {
                 layoutManager = LinearLayoutManager(this@DemoAnkoInitView)
-                companyAdapter = CompanyAdapter()
                 adapter = companyAdapter
 
-                companyAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+                companyAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
                     var item: Any? = adapter.getItem(position)
                     if (item is CompanyItem) {
                         var bundle = Bundle()

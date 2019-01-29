@@ -1,10 +1,7 @@
 package belink.adapter
 
-import belink.spark.com.tyc.R
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import repos.model.CompanyItem
-import repos.model.HotResult
 
 /**
  * Created by Univer Quie on 2019/1/19.
@@ -12,18 +9,14 @@ import repos.model.HotResult
  * @email: 397826579@qq.com
  */
 
-//热搜
-open class HotSearchAdapter : BaseQuickAdapter<HotResult, BaseViewHolder>(R.layout.item_hot_search_company) {
+// parent abs adapter 抽象类，具体实现请到initItemData实现，实例请看 BaseActivity
 
-    override fun convert(helper: BaseViewHolder, item: HotResult) {
-        helper.setText(R.id.tv_name, item.office[0].companyName)
+abstract class AbsTycAdapter<T : Any>(id: Int) : BaseQuickAdapter<T, BaseViewHolder>(id) {
+
+    override fun convert(helper: BaseViewHolder, item: T) {
+        initItemData(helper, item)
     }
-}
 
-//公司搜索结果列表
-open class CompanyAdapter : BaseQuickAdapter<CompanyItem, BaseViewHolder>(R.layout.item_company) {
-
-    override fun convert(helper: BaseViewHolder, item: CompanyItem) {
-        helper.setText(R.id.tv_name, item.name)
-    }
+    //初始化item数据
+    abstract fun initItemData(helper: BaseViewHolder, item: T)
 }

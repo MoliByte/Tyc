@@ -17,6 +17,7 @@ import io.reactivex.Observable
  * @email: 397826579@qq.com
  */
 abstract class AbsTycPresenter : ITycService {
+//    val auth = "0###oo34J0dv_aR36nehbWZ4k32tgSng###%d###835e399f920b64890fc8adfbd81b0775"
     val auth = "0###oo34J0dv_aR36nehbWZ4k32tgSng###%d###835e399f920b64890fc8adfbd81b0775"
     var authorization: String? = ""
         get() {
