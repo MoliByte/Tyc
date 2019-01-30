@@ -35,11 +35,11 @@ abstract class AbsAnkoAcitivity : BaseActivity() {
                     scaleType = ImageView.ScaleType.CENTER_INSIDE
                     adjustViewBounds = true
                     setOnClickListener { finish() }
-                }.lparams(wrapContent, toolbarHeight) {
+                }.lparams(wrapContent, mToolbarHeight) {
                     centerVertically()
                     alignParentStart()
                 }
-            }.lparams(matchParent, toolbarHeight)
+            }.lparams(matchParent, mToolbarHeight)
 
 
         }

@@ -11,14 +11,14 @@ class MainActivity : AbsMainActivit() {
         TycPresenter.searchHomePageHotWord(this, object : AbsView<HomePageHotWordModel>() {
             override fun success(data: HomePageHotWordModel) {
                 val baseInfoModel: HomePageHotWordModel? = data
-                hotSearchAdapter?.setNewData(baseInfoModel?.data?.hotHuman?.resultList)
+                mHotSearchAdapter?.setNewData(baseInfoModel?.data?.hotHuman?.resultList)
             }
         })
 
         TycPresenter.hotSearchWxHotWord(this, object : AbsView<HotSearchModel>() {
             override fun success(data: HotSearchModel) {
                 val baseInfoModel: HotSearchModel? = data
-                wxHotSearchAdapter?.setNewData(baseInfoModel?.data)
+                mWxHotSearchAdapter?.setNewData(baseInfoModel?.data)
             }
         })
     }

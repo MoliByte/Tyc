@@ -19,14 +19,14 @@ abstract class AbsMainActivit : AbsXmlAcitivity(), SearchView.OnQueryTextListene
     var recyclerView: RecyclerView? = null
 
     override fun initView() {
-        searchView = viewHolder?.getView(R.id.searchView)
-        recyclerView = viewHolder?.getView(R.id.recyclerView)
+        searchView = mViewHolder?.getView(R.id.searchView)
+        recyclerView = mViewHolder?.getView(R.id.recyclerView)
         initSeachView(searchView)
         searchView?.setOnQueryTextListener(this@AbsMainActivit)
 
-        recyclerView?.adapter = wxHotSearchAdapter
+        recyclerView?.adapter = mWxHotSearchAdapter
 
-        wxHotSearchAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        mWxHotSearchAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val item: Any? = adapter.getItem(position)
             if (item is WxHotWordCompanyData) {
                 val bundle = Bundle()

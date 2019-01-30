@@ -43,7 +43,7 @@ abstract class DemoAnkoInitView : AbsAnkoAcitivity() {
                             override fun success(data: SearchJsonModel) {
                                 val baseInfoModel: SearchJsonModel? = data
                                 Log.e(TAG, baseInfoModel?.state)
-                                companyAdapter?.setNewData(baseInfoModel?.data?.companyList)
+                                mCompanyAdapter?.setNewData(baseInfoModel?.data?.companyList)
                             }
                         })
                         return false
@@ -58,9 +58,9 @@ abstract class DemoAnkoInitView : AbsAnkoAcitivity() {
 
             recyclerView {
                 layoutManager = LinearLayoutManager(this@DemoAnkoInitView)
-                adapter = companyAdapter
+                adapter = mCompanyAdapter
 
-                companyAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+                mCompanyAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
                     var item: Any? = adapter.getItem(position)
                     if (item is CompanyItem) {
                         var bundle = Bundle()

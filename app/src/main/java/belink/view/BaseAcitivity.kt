@@ -24,16 +24,19 @@ import repos.model.WxHotWordCompanyData
  */
 abstract class BaseActivity : RxAppCompatActivity() {
     val TAG: String? = javaClass.simpleName
-    var viewHolder: ViewHolderBuilder? = null
+    var mViewHolder: ViewHolderBuilder? = null
 
-    val toolbarHeight: Int = App.instance.dip(60)
+    val mToolbarHeight: Int = App.instance.dip(60)
 
     /**
      * 初始化视图
      */
     abstract fun initView()
 
-    abstract fun getLayoutId(): Int;
+    /**
+     *
+     */
+    abstract fun getLayoutId(): Int
 
     /**
      * 初始化数据
@@ -94,7 +97,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     /**
      * 天眼查微信小程序热搜公司adapter
      */
-    var wxHotSearchAdapter: AbsTycAdapter<WxHotWordCompanyData>? = object : AbsTycAdapter<WxHotWordCompanyData>(R.layout.item_hot_search_company) {
+    var mWxHotSearchAdapter: AbsTycAdapter<WxHotWordCompanyData>? = object : AbsTycAdapter<WxHotWordCompanyData>(R.layout.item_hot_search_company) {
         override fun initItemData(helper: BaseViewHolder, item: WxHotWordCompanyData) {
             helper.setText(R.id.tv_name, item.companyName)
         }
@@ -103,16 +106,17 @@ abstract class BaseActivity : RxAppCompatActivity() {
     /**
      * 天眼查热搜公司adapter
      */
-    var hotSearchAdapter: AbsTycAdapter<HotResult>? = object : AbsTycAdapter<HotResult>(R.layout.item_hot_search_company) {
+    var mHotSearchAdapter: AbsTycAdapter<HotResult>? = object : AbsTycAdapter<HotResult>(R.layout.item_hot_search_company) {
         override fun initItemData(helper: BaseViewHolder, item: HotResult) {
             helper.setText(R.id.tv_name, item.office[0].companyName)
         }
     }
 
     /**
-     * 搜索公司名称返回的结果列表
+     * 搜索公司名称返回的结果列表 Adapter
+     *
      */
-    var companyAdapter: AbsTycAdapter<CompanyItem>? = object : AbsTycAdapter<CompanyItem>(R.layout.item_company) {
+    var mCompanyAdapter: AbsTycAdapter<CompanyItem>? = object : AbsTycAdapter<CompanyItem>(R.layout.item_company) {
 
         override fun initItemData(helper: BaseViewHolder, item: CompanyItem) {
             helper.setText(R.id.tv_name, item.name)

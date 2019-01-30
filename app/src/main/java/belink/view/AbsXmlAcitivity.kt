@@ -19,7 +19,7 @@ abstract class AbsXmlAcitivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        viewHolder = ViewHolderBuilder.newBuild(window.decorView)
+        mViewHolder = ViewHolderBuilder.newBuild(window.decorView)
         initView()
         initData()
     }

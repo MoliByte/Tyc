@@ -20,9 +20,8 @@ import service.impl.TycPresenter
  *
  */
 abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTextListener {
-    lateinit var searchView: SearchView
-    lateinit var recyclerView: RecyclerView
-
+    var mRecyclerView: RecyclerView? = null
+    var mSearchView:SearchView? = null
     lateinit var iv_back: ImageView
 
     override fun getLayoutId(): Int {
@@ -30,15 +29,17 @@ abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTex
     }
 
     override fun initView() {
-        searchView = findViewById(R.id.searchView)
         iv_back = findViewById(R.id.iv_back)
         iv_back.setOnClickListener {
             finish()
         }
-        initSeachView(searchView)
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.adapter = companyAdapter
-        companyAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        mSearchView = mViewHolder?.getView(R.id.searchView)
+        initSeachView(mSearchView)
+        mSearchView?.setOnQueryTextListener(this@AbsCompanySearchResult)
+
+        mRecyclerView = mViewHolder?.getView(R.id.recyclerView)
+        mRecyclerView?.adapter = mCompanyAdapter
+        mCompanyAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             var item: Any? = adapter.getItem(position)
             if (item is CompanyItem) {
                 var bundle = Bundle()
@@ -46,8 +47,6 @@ abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTex
                 goActivity(this@AbsCompanySearchResult, CompanyDetailsActivity::class.java, bundle)
             }
         }
-
-        searchView.setOnQueryTextListener(this@AbsCompanySearchResult)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -55,7 +54,7 @@ abstract class AbsCompanySearchResult : AbsXmlAcitivity(), SearchView.OnQueryTex
             override fun success(data: SearchJsonModel) {
                 val baseInfoModel: SearchJsonModel? = data
                 Log.e(TAG, baseInfoModel?.state)
-                companyAdapter?.setNewData(baseInfoModel?.data?.companyList)
+                mCompanyAdapter?.setNewData(baseInfoModel?.data?.companyList)
             }
         })
         return false
