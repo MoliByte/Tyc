@@ -19,19 +19,13 @@ import java.lang.ref.WeakReference
  *
  * linearlayout behavior
  */
-class HeaderFloatBehavior : CoordinatorLayout.Behavior<View> {
+class HeaderFloatBehavior(context: Context, attrs: AttributeSet) : CoordinatorLayout.Behavior<View>(context,attrs) {
     val TAG = "HeadFloatBehavior"
     private var dependentView: WeakReference<View>? = null
-     var context:Context?  = null
-    constructor (context: Context, attrs: AttributeSet) : super(context, attrs) {
-        this.context = context
-    }
 
-    //dependency 变化时，可以对child 操作
-    //被观察View变化的时候回调用的方法
+
     override fun onDependentViewChanged(parent: CoordinatorLayout?, child: View?, dependency: View?): Boolean {
         val resource: Resources = getDependentView().resources
-
         val progress: Float = 1.0f - Math.abs(dependency?.translationY!! / (dependency.height.minus(resource.getDimension(R.dimen.collapsed_header_height))))
 
         val collapsedOffset: Float = resource.getDimension(R.dimen.collapsed_float_offset_y)
@@ -58,7 +52,7 @@ class HeaderFloatBehavior : CoordinatorLayout.Behavior<View> {
         return true
     }
 
-    //寻找被观察的view
+
     override fun layoutDependsOn(parent: CoordinatorLayout?, child: View?, dependency: View?): Boolean {
         //Log.e(TAG, "dependency = "+dependency)
         if (dependency != null && dependency.id == R.id.scrolling_header) {

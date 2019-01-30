@@ -16,18 +16,19 @@ import java.lang.ref.WeakReference
  * @author: Univer Quie
  * @email: 397826579@qq.com
  */
-class HeaderScrollingBehavior : CoordinatorLayout.Behavior<RecyclerView> {
+class HeaderScrollingBehavior(context: Context, attrs: AttributeSet) : CoordinatorLayout.Behavior<RecyclerView>(context,attrs) {
     private var isExpanded = false
     private var isScrolling = false
 
     private var dependentView: WeakReference<View>? = null
-    private var scroller: Scroller? = null;
-    private var handler: Handler? = null;
+    private var scroller: Scroller? = null
+    private var handler: Handler? = null
 
-    constructor (context: Context, attrs: AttributeSet) : super(context, attrs) {
+    init {
         scroller = Scroller(context)
         handler = Handler()
     }
+
 
     override fun layoutDependsOn(parent: CoordinatorLayout?, child: RecyclerView?, dependency: View?): Boolean {
         if (dependency != null && dependency.id == R.id.scrolling_header) {
